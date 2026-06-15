@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import { BookOpen } from "lucide-react";
 
 export const meta = {
@@ -36,7 +36,7 @@ const C = {
 // SHARED UI COMPONENTS
 // ─────────────────────────────────────────────────────────────
 
-function LearningGoals({ goals }) {
+function LearningGoals({ goals }: { goals: string[] }) {
   return (
     <div style={{
       background: `linear-gradient(135deg, ${C.teal} 0%, ${C.tealMd} 100%)`,
@@ -56,7 +56,7 @@ function LearningGoals({ goals }) {
   );
 }
 
-function Callout({ type = "info", title, children }) {
+function Callout({ type = "info", title, children }: { type?: "info" | "warning" | "danger" | "success" | "memory"; title?: string; children?: ReactNode }) {
   const map = {
     info:    { bg: C.blueLt,   border: C.blue,   icon: "💡" },
     warning: { bg: C.amberLt,  border: C.amber,   icon: "⚠️" },
@@ -81,7 +81,7 @@ function Callout({ type = "info", title, children }) {
   );
 }
 
-function SectionHeader({ number, title, subtitle }) {
+function SectionHeader({ number, title, subtitle }: { number: string; title: string; subtitle?: string }) {
   return (
     <div style={{ borderTop: `3px solid ${C.teal}`, paddingTop: 32, marginTop: 56, marginBottom: 24 }}>
       <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
@@ -99,7 +99,7 @@ function SectionHeader({ number, title, subtitle }) {
   );
 }
 
-function FormulaBox({ label, formula, explanation }) {
+function FormulaBox({ label, formula, explanation }: { label?: string; formula: ReactNode; explanation?: ReactNode }) {
   return (
     <div style={{
       background: C.slate, borderRadius: 12, padding: "22px 28px", margin: "24px 0",
@@ -124,7 +124,7 @@ function FormulaBox({ label, formula, explanation }) {
   );
 }
 
-function ClinicalCase({ title, profession, children }) {
+function ClinicalCase({ title, profession, children }: { title?: string; profession?: string; children?: ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
     <div style={{
@@ -161,7 +161,7 @@ function ClinicalCase({ title, profession, children }) {
   );
 }
 
-function TableContingencia({ data }) {
+function TableContingencia({ data }: { data: { tp: number; fp: number; fn: number; tn: number } }) {
   // data: { tp, fp, fn, tn }
   const { tp, fp, fn, tn } = data;
   const total = tp + fp + fn + tn;
@@ -172,7 +172,7 @@ function TableContingencia({ data }) {
   const lrPos = (tp / (tp + fn)) / (fp / (fp + tn));
   const lrNeg = (fn / (tp + fn)) / (tn / (fp + tn));
 
-  const cell = (val, bg = "#fff", bold = false) => (
+  const cell = (val: ReactNode, bg = "#fff", bold = false) => (
     <td style={{
       padding: "12px 16px", textAlign: "center", background: bg,
       fontWeight: bold ? 700 : 400, fontSize: 14, borderBottom: `1px solid ${C.border}`
@@ -278,10 +278,10 @@ function NomogramaFagan() {
   const COL  = { pre: 80, lr: 210, post: 340 };
 
   // Logarithmic mapping helpers
-  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 
   // Map probability (0–100) to Y via log-odds
-  const probToY = p => {
+  const probToY = (p: number) => {
     const safe = clamp(p, 0.5, 99.5);
     const lo   = Math.log(safe / (100 - safe));
     const loMin = Math.log(0.5 / 99.5);
@@ -290,7 +290,7 @@ function NomogramaFagan() {
   };
 
   // Map LR (0.001–1000) to Y via log10
-  const lrToY = r => {
+  const lrToY = (r: number) => {
     const safe = clamp(r, 0.001, 1000);
     const lo   = Math.log10(safe);
     const loMin = Math.log10(0.001);
@@ -306,7 +306,7 @@ function NomogramaFagan() {
   const y_lr   = lrToY(lr);
   const y_post = probToY(post);
 
-  const interp = (x0, y0, x1, y1, x) => y0 + (y1 - y0) * (x - x0) / (x1 - x0);
+  const interp = (x0: number, y0: number, x1: number, y1: number, x: number) => y0 + (y1 - y0) * (x - x0) / (x1 - x0);
   const y_line_lr = interp(COL.pre, y_pre, COL.post, y_post, COL.lr);
 
   const lrQuality = lr >= 10 ? { label: "Muy alto — cambio grande", color: "#059669" }
@@ -317,11 +317,11 @@ function NomogramaFagan() {
     : lr >= 0.1 ? { label: "LR− alto", color: "#DC2626" }
     : { label: "LR− muy alto — descarta enfermedad", color: "#991B1B" };
 
-  const Axis = ({ ticks, x, labelLeft, yFn, isLR = false }) => (
+  const Axis = ({ ticks, x, labelLeft, yFn, isLR = false }: { ticks: number[]; x: number; labelLeft?: boolean; yFn: (v: number) => number; isLR?: boolean }) => (
     <g>
       <line x1={x} y1={AXIS.y0} x2={x} y2={AXIS.y1}
         stroke="#94A3B8" strokeWidth="1.5" />
-      {ticks.map(t => {
+      {ticks.map((t: number) => {
         const y = yFn(t);
         const txt = isLR ? (t >= 1 ? t : t >= 0.1 ? t.toFixed(1) : t) : `${t}`;
         return (
@@ -411,7 +411,7 @@ function NomogramaFagan() {
             fill="white" stroke="#378ADD" strokeWidth="2" />
 
           {/* Endpoint dots */}
-          {[[COL.pre, y_pre, C.teal], [COL.post, y_post, "#1D4ED8"]].map(([cx, cy, col], i) => (
+          {([[COL.pre, y_pre, C.teal], [COL.post, y_post, "#1D4ED8"]] as [number, number, string][]).map(([cx, cy, col], i) => (
             <circle key={i} cx={cx} cy={cy} r="6"
               fill={col} stroke="white" strokeWidth="2" />
           ))}
@@ -469,8 +469,8 @@ function NomogramaFagan() {
 // ─────────────────────────────────────────────────────────────
 // INTERACTIVE QUIZ
 // ─────────────────────────────────────────────────────────────
-function Quiz({ question, options, correct, explanation }) {
-  const [sel, setSel] = useState(null);
+function Quiz({ question, options, correct, explanation }: { question: string; options: string[]; correct: number; explanation?: string }) {
+  const [sel, setSel] = useState<number | null>(null);
   const done = sel !== null;
   return (
     <div style={{
@@ -679,7 +679,7 @@ function BayesEvidenceUpdater() {
   const posteriorOdds = priorOdds * lr;
   const posterior = Math.round((posteriorOdds / (1 + posteriorOdds)) * 100);
 
-  const getLRLabel = (v) => {
+  const getLRLabel = (v: number) => {
     if (v >= 20) return { label: "Evidencia muy fuerte", color: C.teal };
     if (v >= 10) return { label: "Evidencia fuerte", color: "#059669" };
     if (v >= 5)  return { label: "Evidencia moderada", color: C.blue };
@@ -689,7 +689,7 @@ function BayesEvidenceUpdater() {
 
   const lrInfo = getLRLabel(lr);
   const delta = posterior - prior;
-  const barW = (v) => `${Math.max(4, v)}%`;
+  const barW = (v: number) => `${Math.max(4, v)}%`;
 
   return (
     <div style={{
@@ -1849,7 +1849,6 @@ export default function Modulo3ProbabilidadBayes() {
           </p>
         </div>
       </div>
-
     </div>
   );
 }

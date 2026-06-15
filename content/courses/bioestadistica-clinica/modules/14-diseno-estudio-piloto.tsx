@@ -13,7 +13,7 @@ function SemaforoPiloto() {
   const [retencion, setRetencion] = useState(75);
   const [adherencia, setAdherencia] = useState(75);
 
-  const semaforo = (val, umbrales) => {
+  const semaforo = (val: number, umbrales: { verde: number; amarillo: number }) => {
     if (val >= umbrales.verde) return { color: "#059669", bg: "#ECFDF5", label: "Verde — Proceder", icon: "🟢" };
     if (val >= umbrales.amarillo) return { color: "#D97706", bg: "#FFFBEB", label: "Amarillo — Modificar protocolo", icon: "🟡" };
     return { color: "#DC2626", bg: "#FEF2F2", label: "Rojo — Replantear el estudio", icon: "🔴" };

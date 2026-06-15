@@ -1105,12 +1105,13 @@ export default function Lesson() {
             
           </p>
           <br/>
-          <p className="text-sm font-medium text-gray-600">
-          Nightingale tampoco nació sabiendo, aprendió porque le importaba cambiar lo que veía.
+          <p className="text-sm font-medium text-indigo-600">
+            Cada módulo de este curso suma una herramienta más a esa caja: de la ansiedad
+            al empoderamiento, un concepto a la vez.
           </p>
         </div>
       </div>
-      </div>
+    </div>
     </MathJaxContext>
   );
 }
