@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bioestadística para Profesionales de la Salud
 
-## Getting Started
+Aplicación web (Next.js) del curso **Bioestadística Clínica**, orientado a profesionales de ciencias de la salud. Presenta los módulos del curso con componentes interactivos, visualizaciones estadísticas y un diseño minimalista basado en un sistema modular (Bento).
 
-First, run the development server:
+## Stack técnico
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js 16** (App Router) + **React 19** + **TypeScript**
+- **Tailwind CSS 4** para estilos
+- **KaTeX** / **MathJax** para notación matemática
+- **Lucide React** para iconografía
+
+## Estructura del proyecto
+
+```
+app/
+  cursos/bioestadistica-clinica/   # Rutas del curso (módulos dinámicos por slug)
+  layout.tsx                       # Layout raíz (metadata, fuentes, navbar)
+content/
+  courses/bioestadistica-clinica/  # Contenido de cada módulo (00 a 14 + bonus)
+components/
+  graphics/    # Componentes de gráficos estadísticos
+  navigation/  # Navbar y navegación del curso
+  pedagogy/    # Componentes pedagógicos (glosario, ejemplos, etc.)
+  ui/          # Componentes de interfaz base
+lib/
+  theme.ts     # Configuración de tema y estilos
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Requisitos previos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Node.js 18.18 o superior
+- pnpm (gestor de paquetes del proyecto)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Instalación y ejecución local
 
-## Learn More
+```bash
+pnpm install
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Scripts disponibles
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Comando      | Descripción                       |
+|--------------|------------------------------------|
+| `pnpm dev`   | Inicia el servidor de desarrollo   |
+| `pnpm build` | Genera la build de producción      |
+| `pnpm start` | Ejecuta la build de producción     |
 
-## Deploy on Vercel
+## Módulos del curso
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+00. Orientación
+01. De la ansiedad al empoderamiento
+02. El lenguaje de los datos – Variables
+03. Fundamentos estadísticos y muestreo
+04. Probabilidad y el Teorema de Bayes
+05. Sesgos en investigación y su impacto
+06. Muestreo y diseño de estudios
+07. Regresión lineal
+08. Significancia estadística vs. relevancia
+09. Pruebas estadísticas básicas
+10. Análisis de supervivencia
+11. Modelos multivariantes
+12. Evaluación crítica de artículos
+13. Ética estadística
+14. Diseño y plan de análisis de un estudio piloto
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Bonus: Guía para leer gráficos estadísticos
+
+## Despliegue
+
+Compatible con [Vercel](https://vercel.com/new) u otra plataforma que soporte Next.js. Ver la [documentación de despliegue de Next.js](https://nextjs.org/docs/app/building-your-application/deploying).
