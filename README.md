@@ -1,6 +1,6 @@
-# Bioestadística para Profesionales de la Salud
+# Estadística para Profesionales de la Salud
 
-Aplicación web (Next.js) del curso **Bioestadística Clínica**, orientado a profesionales de ciencias de la salud. Presenta los módulos del curso con componentes interactivos, visualizaciones estadísticas y un diseño minimalista basado en un sistema modular (Bento).
+Aplicación web (Next.js) del curso **Estadística para profesionales de ciencias de la salud**. Presenta los módulos del curso con componentes interactivos, visualizaciones estadísticas y un diseño minimalista basado en un sistema modular.
 
 ## Stack técnico
 
@@ -13,10 +13,10 @@ Aplicación web (Next.js) del curso **Bioestadística Clínica**, orientado a pr
 
 ```
 app/
-  cursos/bioestadistica-clinica/   # Rutas del curso (módulos dinámicos por slug)
+  cursos/bioestadistica-app/   # Rutas del curso (módulos dinámicos por slug)
   layout.tsx                       # Layout raíz (metadata, fuentes, navbar)
 content/
-  courses/bioestadistica-clinica/  # Contenido de cada módulo (00 a 14 + bonus)
+  courses/bioestadistica-app/  # Contenido de cada módulo (00 a 14 + bonus)
 components/
   graphics/    # Componentes de gráficos estadísticos
   navigation/  # Navbar y navegación del curso
@@ -50,7 +50,6 @@ Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
 ## Módulos del curso
 
-00. Orientación
 01. De la ansiedad al empoderamiento
 02. El lenguaje de los datos – Variables
 03. Fundamentos estadísticos y muestreo
