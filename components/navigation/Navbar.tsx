@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -22,9 +23,17 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 no-underline group">
           <span
-            className="w-2 h-2 rounded-full flex-shrink-0 transition-transform group-hover:scale-125"
-            style={{ background: "var(--primary)" }}
-          />
+            className="flex items-center justify-center rounded-md flex-shrink-0 transition-transform group-hover:scale-110"
+            style={{ width: 22, height: 22, background: "var(--primary)" }}
+          >
+            <Image
+              src="/logo-esneider.svg"
+              alt="Logo Esneider Ríos"
+              width={14}
+              height={14}
+              style={{ filter: "invert(1) brightness(2)" }}
+            />
+          </span>
           <span
             className="font-semibold text-sm tracking-tight"
             style={{ color: "var(--fg)" }}
